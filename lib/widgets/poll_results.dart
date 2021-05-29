@@ -1,9 +1,10 @@
+/// This file contains the results widget.
 import 'package:flutter/material.dart';
 import '../models/poll_models.dart';
 import 'progress_widget.dart';
 
-/// This will show the results of poll.
 class PollResultsWidget extends StatelessWidget {
+  /// This widget will show the results of poll.
   final double percentage;
   final PollOptions optionModel;
   final TextStyle? optionsStyle;
@@ -45,6 +46,8 @@ class PollResultsWidget extends StatelessWidget {
                   ),
                 ),
               ),
+
+              /// If [optionModel.isSelected] is true a circle with tick will appear after that label,which indicates the selected of that particular option.
               if (optionModel.isSelected == true)
                 Container(
                   padding: EdgeInsets.only(left: 10),

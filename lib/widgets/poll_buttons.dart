@@ -1,7 +1,9 @@
+/// This file contains the actual option widget used.
 import 'package:flutter/material.dart';
 import '../models/poll_models.dart';
 
 class PollButtonsWidget extends StatelessWidget {
+  /// This class does not have state that's why created as stateless.
   final PollOptions optionModel;
   final TextStyle? optionsStyle;
   final Function onPressed;
@@ -31,7 +33,8 @@ class PollButtonsWidget extends StatelessWidget {
           width: 1.5,
         ),
 
-        /// Cutsom theme will be applied here.
+        /// Custom theme will be applied here.
+        /// First it checks the passed parameter , if [optionsStyle] is null the default theme will be applied.
         textStyle: optionsStyle ??
             TextStyle(
               fontSize: 13,

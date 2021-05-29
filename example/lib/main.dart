@@ -1,3 +1,4 @@
+/// This file contains the example showing how to use poll widget in your application.
 import 'package:flutter/material.dart';
 import 'package:simple_polls/simple_polls.dart';
 

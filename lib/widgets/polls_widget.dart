@@ -1,3 +1,4 @@
+/// This file contains the main widget that will be used to build poll widget.
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'poll_buttons.dart';
@@ -5,8 +6,8 @@ import '../models/poll_models.dart';
 import 'poll_results.dart';
 import 'poll_status.dart';
 
-/// This is the main poll widget file
 class SimplePollsWidget extends StatefulWidget {
+  /// This is the main poll widget , call this with appropriate parameters to create a poll widget.
   final PollFrameModel model;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
@@ -29,15 +30,18 @@ class SimplePollsWidget extends StatefulWidget {
 }
 
 class _SimplePollsWidgetState extends State<SimplePollsWidget> {
+  /// [refreshTimer] will have a duration equals to the difference of time now and time to end polling.
   Timer? refreshTimer;
+
+  /// Timer function needs to be created here in order to executed only once.
   @override
   void initState() {
     super.initState();
-
-    /// This will refresh the widget when the poll time expires, this timer will get cancel on dispose.
     if (widget.model.endTime!.toUtc().isAfter(DateTime.now().toUtc())) {
+      /// This will refresh the widget when the poll time expires, this timer will get cancel on dispose.
       refreshTimer =
           Timer(widget.model.endTime!.difference(DateTime.now().toUtc()), () {
+        /// Reloads the widget when poll end time reaches so that results screen will be visible by default, even if user has not voted.
         setState(() {});
       });
     }
@@ -54,14 +58,20 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
 
   Widget build(BuildContext context) {
     return Container(
+      /// If [widget.margin] is null apply default margin.
       margin: widget.margin ?? EdgeInsets.symmetric(horizontal: 8),
+
+      /// If [widget.padding] is null apply default margin.
       padding: widget.padding ?? EdgeInsets.fromLTRB(15, 15, 15, 5),
+
+      /// If [widget.decoration] is null apply default margin.
       decoration: widget.decoration ??
           BoxDecoration(
             border: Border.all(color: Colors.grey[200]!),
             color: Colors.white,
           ),
       child: Column(
+        /// CrossAxisAlignment.stretch is used to stretch options buttons to full length.
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -72,12 +82,14 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
           ...List.generate(
             widget.model.options.length,
             (index) {
+              /// [percentage] will be used to show progress in the form of bar in results screen.
+              /// Check for 0/0 is present to avoid exception.
               double percentage = widget.model.totalPolls == 0
                   ? 0
                   : widget.model.options[index].pollsCount /
                       widget.model.totalPolls;
 
-              /// Check if the person has voted or poll has expired, if true the results screen will show up.
+              /// Check if the person has voted or poll has expired, if conditions are met the results screen will show up.
               if ((widget.model.hasVoted == true) ||
                   widget.model.endTime!
                       .toUtc()

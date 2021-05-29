@@ -9,3 +9,7 @@
 ## 1.0.2
 
 * Minor changes on readme file, attached screenshots.
+
+## 1.0.3
+
+* Added a functionality to hide undo button on timer expire and added more documentation.

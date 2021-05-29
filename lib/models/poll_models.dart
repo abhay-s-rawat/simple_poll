@@ -1,7 +1,8 @@
+/// This file contains 2 models which will be used to create polls widget.
 import 'package:flutter/material.dart';
 
-/// PollFrameModel model is the main data model to be passed to polls widget.
 class PollFrameModel {
+  /// This model is the main data model to be passed to polls widget.
   int totalPolls;
   final Widget title;
   final List<PollOptions> options;
@@ -19,8 +20,8 @@ class PollFrameModel {
   });
 }
 
-/// PollOptions model will have properties to configure options of the poll.
 class PollOptions {
+  /// This model will have properties to configure options of the poll.
   final String label;
   final dynamic id;
   int pollsCount;

@@ -1,6 +1,6 @@
 # simple_polls
 
-A simple polls widget is simple widget with language localizations. 
+simple_polls widget is polling widget with language localizations.
 
 Liked the work ? [support me](https://www.buymeacoffee.com/abhayrawat)
 

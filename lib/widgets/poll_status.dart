@@ -1,10 +1,12 @@
+/// This file contains the widget which will appear the below the options widget.
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../models/poll_models.dart';
 import '../translations/translations.dart';
 
-/// This widget will show status of the polls. eg: showing total polls and time remaining.
 class PollStatusWidget extends StatelessWidget {
+  /// This widget will show status of the polls.
+  /// It shows total polls, time remaining in polling and undo button(if poll is editable).
   final PollFrameModel model;
   final String languageCode;
   final Function onUndo;
@@ -17,11 +19,20 @@ class PollStatusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// This portion will register these languages for timeago/timefromnow translation.
+    /// This portion will register these languages for timeago/timefromnow translation. Add more languages to register for more languages.
+    /// This will only translate time relation to now. For example, '5 minutes from now' will be translated to appropriate language.
+    /// Italian language registration.
     timeago.setLocaleMessages('it', timeago.ItMessages());
+
+    /// French language registration.
     timeago.setLocaleMessages('fr', timeago.FrMessages());
+
+    /// Spanish language registration.
     timeago.setLocaleMessages('es', timeago.EsMessages());
+
+    /// German language registration.
     timeago.setLocaleMessages('gr', timeago.GrMessages());
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -63,7 +74,13 @@ class PollStatusWidget extends StatelessWidget {
             ),
           ),
         ),
-        if ((model.editablePoll == true) && (model.hasVoted == true)) ...[
+
+        /// This checks if post is editable and user has selected an option.
+        /// If [model.editablePoll] evaluates to tue and [model.hasVoted] evaluates to true an 'undo' button will show up which on pressed will remove the option selection and lets user select an option again.
+        /// If poll time expires undo button will not be visible.
+        if ((model.editablePoll == true) &&
+            (model.hasVoted == true) &&
+            (model.endTime!.toUtc().isAfter(DateTime.now().toUtc()))) ...[
           Text(
             ' • ',
             overflow: TextOverflow.ellipsis,

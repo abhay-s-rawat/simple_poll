@@ -1,6 +1,6 @@
 name: simple_polls
-description: A simple polls widget is simple widget with language localizations.
-version: 1.0.2
+description: simple_polls widget is polling widget with language localizations.
+version: 1.0.3
 homepage: https://github.com/abhay-s-rawat/simple_poll
 
 environment:
