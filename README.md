@@ -1,8 +1,12 @@
+<p >
+<a href="https://www.buymeacoffee.com/abhayrawat" target="_blank"><img align="center" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="30px" width= "108px"></a>
+</p> 
+
 # simple_polls
 
 simple_polls widget is polling widget with language localizations.
 
-Liked the work ? [support me](https://www.buymeacoffee.com/abhayrawat)
+Liked my work ? [support me](https://www.buymeacoffee.com/abhayrawat)
 
 ## Example
 for full example please view example/main.dart
