@@ -1,6 +1,8 @@
 # simple_polls
 
-A simple polls widget is simple widget with language localizations.
+A simple polls widget is simple widget with language localizations. 
+
+Liked the work ? [support me](https://www.buymeacoffee.com/abhayrawat)
 
 ## Example
 for full example please view example/main.dart
@@ -45,10 +47,9 @@ SimplePollsWidget(
         )
 ```
 ## Screenshots
-<img src="images/en_options.jpg" width="400" height="700"> <img src="images/en_results.jpg" width="400" height="700"> <img src="images/it_options.jpg" width="400" height="700"> <img src="images/it_results.jpg" width="400" height="700">
 
+![](https://raw.githubusercontent.com/abhay-s-rawat/simple_poll/main/images/en_options.jpg) ![](https://raw.githubusercontent.com/abhay-s-rawat/simple_poll/main/images/en_results.jpg) ![](https://raw.githubusercontent.com/abhay-s-rawat/simple_poll/main/images/it_options.jpg) ![](https://raw.githubusercontent.com/abhay-s-rawat/simple_poll/main/images/it_results.jpg)
+
+>NOTE:
 >Allowed language codes are it,fr,es,gr,en where en is default.
-
 >This widget does not translate title and options, they should be translated by user.
-
-> Liked the work ? [support me](https://www.buymeacoffee.com/abhayrawat)
