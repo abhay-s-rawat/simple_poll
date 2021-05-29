@@ -45,7 +45,7 @@ SimplePollsWidget(
         )
 ```
 ## Screenshots
-![en_options](images/en_options.jpg) ![en_results](images/en_results.jpg) ![it_options](images/it_options.jpg) ![it_results](images/it_results.jpg)
+<img src="images/en_options.jpg" width="400" height="700"> <img src="images/en_results.jpg" width="400" height="700"> <img src="images/it_options.jpg" width="400" height="700"> <img src="images/it_results.jpg" width="400" height="700">
 
 >Allowed language codes are it,fr,es,gr,en where en is default.
 
