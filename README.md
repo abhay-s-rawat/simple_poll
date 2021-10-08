@@ -12,6 +12,10 @@ Liked my work ? [support me](https://www.buymeacoffee.com/abhayrawat)
 for full example please view example/main.dart
 ```dart
 SimplePollsWidget(
+          onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
+            print('Now total polls are : ' + model.totalPolls.toString());
+            print('Selected option has label : ' + selectedOptionModel.label);
+          },
           model: PollFrameModel(
             title: Container(
               alignment: Alignment.centerLeft,

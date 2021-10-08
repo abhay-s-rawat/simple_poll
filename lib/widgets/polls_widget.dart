@@ -115,7 +115,8 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
                           widget.model.totalPolls += 1;
                           widget.model.options[index].pollsCount += 1;
                           if (widget.onSelection != null) {
-                            widget.onSelection!(widget.model);
+                            widget.onSelection!(
+                                widget.model, widget.model.options[index]);
                           }
                         });
                       } else {

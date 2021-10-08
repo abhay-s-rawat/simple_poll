@@ -17,3 +17,17 @@
 ## 1.0.4
 
 * Corrected and added more documentation.
+
+## 1.0.5
+
+* Now onselection method of SimplePollsWidget will return 2 objects as show below. This change was done because a loop was needed to get the selectd option now it just returns the options which registered a tap.
+New:
+onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
+            print('Now total polls are : ' + model.totalPolls.toString());
+            print('Selected option has label : ' + selectedOptionModel.label);
+},
+
+Old:
+onSelection: (PollFrameModel model) {
+        print('Now total polls are : ' + model.totalPolls.toString());
+},
