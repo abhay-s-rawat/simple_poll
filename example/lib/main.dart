@@ -38,10 +38,17 @@ class ExampleApp extends StatelessWidget {
           /// onSelection will be triggered when users presses a option or presses undo button(only available on editable polls).
           /// This function will be called after all the calculation like reducing total polls and marking previous option not selected.
           /// It returns the PollFrameModel .Use this function to do some extra operations like storing this poll into other variable.
-          onSelection: (PollFrameModel model, PollOptions selectedOptionModel) {
+          onSelection:
+              (PollFrameModel model, PollOptions? selectedOptionModel) {
             print('Now total polls are : ' + model.totalPolls.toString());
-            print('Selected option has label : ' + selectedOptionModel.label);
+            print('Selected option has label : ' + selectedOptionModel!.label);
           },
+          onReset: (PollFrameModel model) {
+            print(
+                'Poll has been reset, this happens only in case of editable polls');
+          },
+          optionsBorderShape:
+              RoundedRectangleBorder(), // Default is stadium border
 
           /// optionsStyle will have style used in options.
           optionsStyle: TextStyle(

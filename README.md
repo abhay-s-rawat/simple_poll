@@ -16,6 +16,11 @@ SimplePollsWidget(
             print('Now total polls are : ' + model.totalPolls.toString());
             print('Selected option has label : ' + selectedOptionModel.label);
           },
+          onReset: (PollFrameModel model) {
+            print(
+                'Poll has been reset, this happens only in case of editable polls');
+          },
+          optionsBorderShape: StadiumBorder(), //Its Default so its not necessary to write this line
           model: PollFrameModel(
             title: Container(
               alignment: Alignment.centerLeft,

@@ -31,3 +31,7 @@ Old:
 onSelection: (PollFrameModel model) {
         print('Now total polls are : ' + model.totalPolls.toString());
 },
+
+## 1.0.6
+
+* Now user can set custom border shape of option and can pass a function onreset which will be called when poll is editable.

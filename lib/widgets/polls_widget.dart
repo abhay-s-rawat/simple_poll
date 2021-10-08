@@ -13,8 +13,10 @@ class SimplePollsWidget extends StatefulWidget {
   final EdgeInsets? padding;
   final Decoration? decoration;
   final Function? onSelection;
+  final Function? onReset;
   final String languageCode;
   final TextStyle? optionsStyle;
+  final OutlinedBorder optionsBorderShape;
   SimplePollsWidget({
     required this.model,
     this.margin,
@@ -23,6 +25,8 @@ class SimplePollsWidget extends StatefulWidget {
     this.onSelection,
     this.languageCode = 'en',
     this.optionsStyle,
+    this.optionsBorderShape = const StadiumBorder(),
+    this.onReset,
   });
 
   @override
@@ -104,6 +108,7 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
                 return PollButtonsWidget(
                     optionModel: widget.model.options[index],
                     optionsStyle: widget.optionsStyle,
+                    borderShape: widget.optionsBorderShape,
                     onPressed: () {
                       /// Check if poll is still active, if active update the widget with user's response.
                       if (widget.model.endTime!
@@ -147,8 +152,8 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
                     item.pollsCount -= 1;
                   }
                 }
-                if (widget.onSelection != null) {
-                  widget.onSelection!(widget.model);
+                if (widget.onReset != null) {
+                  widget.onReset!(widget.model);
                 }
               });
             },

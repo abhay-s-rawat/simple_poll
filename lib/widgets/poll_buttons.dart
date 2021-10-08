@@ -7,11 +7,13 @@ class PollButtonsWidget extends StatelessWidget {
   final PollOptions optionModel;
   final TextStyle? optionsStyle;
   final Function onPressed;
+  final OutlinedBorder borderShape;
   const PollButtonsWidget({
     Key? key,
     required this.optionModel,
     required this.onPressed,
     this.optionsStyle,
+    this.borderShape = const StadiumBorder(),
   }) : super(key: key);
 
   @override
@@ -27,7 +29,7 @@ class PollButtonsWidget extends StatelessWidget {
       ),
       style: OutlinedButton.styleFrom(
         primary: Theme.of(context).primaryColor,
-        shape: StadiumBorder(),
+        shape: borderShape,
         side: BorderSide(
           color: Theme.of(context).primaryColor,
           width: 1.5,
