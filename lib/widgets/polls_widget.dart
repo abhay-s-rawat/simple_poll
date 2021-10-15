@@ -17,6 +17,9 @@ class SimplePollsWidget extends StatefulWidget {
   final String languageCode;
   final TextStyle? optionsStyle;
   final OutlinedBorder optionsBorderShape;
+  final Color? progressColor;
+  final Color? remainingColor;
+
   SimplePollsWidget({
     required this.model,
     this.margin,
@@ -27,6 +30,8 @@ class SimplePollsWidget extends StatefulWidget {
     this.optionsStyle,
     this.optionsBorderShape = const StadiumBorder(),
     this.onReset,
+    this.progressColor,
+    this.remainingColor,
   });
 
   @override
@@ -45,9 +50,9 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
       /// This will refresh the widget when the poll time expires, this timer will get cancel on dispose.
       refreshTimer =
           Timer(widget.model.endTime!.difference(DateTime.now().toUtc()), () {
-        /// Reloads the widget when poll end time reaches so that results screen will be visible by default, even if user has not voted.
-        setState(() {});
-      });
+            /// Reloads the widget when poll end time reaches so that results screen will be visible by default, even if user has not voted.
+            setState(() {});
+          });
     }
   }
 
@@ -62,6 +67,7 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
 
   Widget build(BuildContext context) {
     return Container(
+
       /// If [widget.margin] is null apply default margin.
       margin: widget.margin ?? EdgeInsets.symmetric(horizontal: 8),
 
@@ -75,6 +81,7 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
             color: Colors.white,
           ),
       child: Column(
+
         /// CrossAxisAlignment.stretch is used to stretch options buttons to full length.
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
@@ -85,13 +92,13 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
           /// This list will generate all the necessary poll options.
           ...List.generate(
             widget.model.options.length,
-            (index) {
+                (index) {
               /// [percentage] will be used to show progress in the form of bar in results screen.
               /// Check for 0/0 is present to avoid exception.
               double percentage = widget.model.totalPolls == 0
                   ? 0
                   : widget.model.options[index].pollsCount /
-                      widget.model.totalPolls;
+                  widget.model.totalPolls;
 
               /// Check if the person has voted or poll has expired, if conditions are met the results screen will show up.
               if ((widget.model.hasVoted == true) ||
@@ -99,9 +106,12 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
                       .toUtc()
                       .isBefore(DateTime.now().toUtc())) {
                 return PollResultsWidget(
-                  percentage: percentage,
-                  optionModel: widget.model.options[index],
-                  optionsStyle: widget.optionsStyle,
+                    percentage: percentage,
+                    optionModel: widget.model.options[index],
+                    optionsStyle: widget.optionsStyle,
+                    progressColor: widget
+                        .progressColor,
+                    remainingColor: widget.remainingColor,
                 );
               } else {
                 /// If check fails the buttons will appear.
@@ -128,7 +138,9 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
                         /// If poll expired show a snackbar and update the widget.
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('Polling time expired.'),
-                          backgroundColor: Theme.of(context).primaryColor,
+                          backgroundColor: Theme
+                              .of(context)
+                              .primaryColor,
                         ));
                         setState(() {});
                       }
