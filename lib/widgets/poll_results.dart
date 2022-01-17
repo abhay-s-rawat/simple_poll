@@ -8,11 +8,16 @@ class PollResultsWidget extends StatelessWidget {
   final double percentage;
   final PollOptions optionModel;
   final TextStyle? optionsStyle;
+  final Color? progressColor;
+  final Color? remainingColor;
+
   const PollResultsWidget({
     Key? key,
     required this.percentage,
     required this.optionModel,
     this.optionsStyle,
+    this.progressColor,
+    this.remainingColor,
   }) : super(key: key);
 
   @override
@@ -23,16 +28,19 @@ class PollResultsWidget extends StatelessWidget {
       title: Stack(
         alignment: Alignment.centerLeft,
         children: [
+
           /// CustomLinearProgressBar is a widget that works like a progress bar but will be static.
           CustomLinearProgressBar(
             value: percentage,
+            progressColor: this.progressColor,
+            remainingColor: this.remainingColor,
           ),
 
           /// This will create the label of the option in results screen.
           Row(
             children: [
               Flexible(
-                child: Container(
+                child: Padding(
                   padding: EdgeInsets.only(left: 10),
                   child: Text(
                     optionModel.label,
@@ -40,7 +48,7 @@ class PollResultsWidget extends StatelessWidget {
                     style: optionsStyle ??
                         TextStyle(
                           fontSize: 13,
-                          color: Theme.of(context).primaryColor,
+                          color: Colors.black,
                           fontWeight: FontWeight.w600,
                         ),
                   ),

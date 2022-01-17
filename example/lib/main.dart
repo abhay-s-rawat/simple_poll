@@ -38,6 +38,8 @@ class ExampleApp extends StatelessWidget {
           /// onSelection will be triggered when users presses a option or presses undo button(only available on editable polls).
           /// This function will be called after all the calculation like reducing total polls and marking previous option not selected.
           /// It returns the PollFrameModel .Use this function to do some extra operations like storing this poll into other variable.
+          progressColor: Colors.green,
+          remainingColor: Colors.grey,
           onSelection:
               (PollFrameModel model, PollOptions? selectedOptionModel) {
             print('Now total polls are : ' + model.totalPolls.toString());
