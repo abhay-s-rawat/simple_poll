@@ -12,8 +12,8 @@ class SimplePollsWidget extends StatefulWidget {
   final EdgeInsets? margin;
   final EdgeInsets? padding;
   final Decoration? decoration;
-  final Function? onSelection;
-  final Function? onReset;
+  final Function(PollFrameModel frameModel, PollOptions option)? onSelection;
+  final Function(PollFrameModel frameModel)? onReset;
   final String languageCode;
   final TextStyle? optionsStyle;
   final OutlinedBorder optionsBorderShape;
@@ -120,7 +120,7 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
                           widget.model.totalPolls += 1;
                           widget.model.options[index].pollsCount += 1;
                           if (widget.onSelection != null) {
-                            widget.onSelection!(
+                            widget.onSelection!.call(
                                 widget.model, widget.model.options[index]);
                           }
                         });
@@ -153,7 +153,7 @@ class _SimplePollsWidgetState extends State<SimplePollsWidget> {
                   }
                 }
                 if (widget.onReset != null) {
-                  widget.onReset!(widget.model);
+                  widget.onReset!.call(widget.model);
                 }
               });
             },

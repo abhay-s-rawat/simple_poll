@@ -35,3 +35,7 @@ onSelection: (PollFrameModel model) {
 ## 1.0.6
 
 * Now user can set custom border shape of option and can pass a function onreset which will be called when poll is editable.
+
+## 1.0.7
+
+* Minor updates.

@@ -6,7 +6,7 @@ class PollButtonsWidget extends StatelessWidget {
   /// This class does not have state that's why created as stateless.
   final PollOptions optionModel;
   final TextStyle? optionsStyle;
-  final Function onPressed;
+  final Function() onPressed;
   final OutlinedBorder borderShape;
   const PollButtonsWidget({
     Key? key,
@@ -19,10 +19,8 @@ class PollButtonsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {
-        /// Calls the passed callback to capture response.
-        onPressed();
-      },
+      /// Calls the passed callback to capture response.
+      onPressed: onPressed,
       child: Text(
         optionModel.label,
         overflow: TextOverflow.ellipsis,

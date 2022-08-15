@@ -15,7 +15,8 @@ class CustomLinearProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraint) {
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraint) {
       return Row(
         children: [
           Container(

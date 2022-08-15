@@ -4,12 +4,12 @@ import 'package:timeago/timeago.dart' as timeago;
 import '../models/poll_models.dart';
 import '../translations/translations.dart';
 
-class PollStatusWidget extends StatelessWidget {
+class PollStatusWidget extends StatefulWidget {
   /// This widget will show status of the polls.
   /// It shows total polls, time remaining in polling and undo button(if poll is editable).
   final PollFrameModel model;
   final String languageCode;
-  final Function onUndo;
+  final Function() onUndo;
   const PollStatusWidget({
     Key? key,
     required this.model,
@@ -18,7 +18,14 @@ class PollStatusWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<PollStatusWidget> createState() => _PollStatusWidgetState();
+}
+
+class _PollStatusWidgetState extends State<PollStatusWidget> {
+  @override
+  void initState() {
+    super.initState();
+
     /// This portion will register these languages for timeago/timefromnow translation. Add more languages to register for more languages.
     /// This will only translate time relation to now. For example, '5 minutes from now' will be translated to appropriate language.
     /// Italian language registration.
@@ -32,15 +39,18 @@ class PollStatusWidget extends StatelessWidget {
 
     /// German language registration.
     timeago.setLocaleMessages('gr', timeago.GrMessages());
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Flexible(
           flex: 2,
           child: Text(
-            model.totalPolls.toString() +
-                ' ${polls_translation[languageCode]!}',
+            widget.model.totalPolls.toString() +
+                ' ${polls_translation[widget.languageCode]!}',
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
               fontSize: 12,
@@ -59,13 +69,13 @@ class PollStatusWidget extends StatelessWidget {
         Flexible(
           flex: 2,
           child: Text(
-            model.endTime!.isBefore(DateTime.now().toUtc())
-                ? polling_ended_translation[languageCode]!
-                : '${ends_translation[languageCode]!}: ' +
+            widget.model.endTime!.isBefore(DateTime.now().toUtc())
+                ? polling_ended_translation[widget.languageCode]!
+                : '${ends_translation[widget.languageCode]!}: ' +
                     timeago.format(
-                      model.endTime!,
+                      widget.model.endTime!,
                       allowFromNow: true,
-                      locale: languageCode,
+                      locale: widget.languageCode,
                     ),
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -78,9 +88,11 @@ class PollStatusWidget extends StatelessWidget {
         /// This checks if post is editable and user has selected an option.
         /// If [model.editablePoll] evaluates to tue and [model.hasVoted] evaluates to true an 'undo' button will show up which on pressed will remove the option selection and lets user select an option again.
         /// If poll time expires undo button will not be visible.
-        if ((model.editablePoll == true) &&
-            (model.hasVoted == true) &&
-            (model.endTime!.toUtc().isAfter(DateTime.now().toUtc()))) ...[
+        if ((widget.model.editablePoll == true) &&
+            (widget.model.hasVoted == true) &&
+            (widget.model.endTime!
+                .toUtc()
+                .isAfter(DateTime.now().toUtc()))) ...[
           Text(
             ' • ',
             overflow: TextOverflow.ellipsis,
@@ -93,16 +105,14 @@ class PollStatusWidget extends StatelessWidget {
             flex: 1,
             child: GestureDetector(
               child: Text(
-                undo_poll_translation[languageCode]!,
+                undo_poll_translation[widget.languageCode]!,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontSize: 13,
                 ),
               ),
-              onTap: () {
-                onUndo();
-              },
+              onTap: widget.onUndo,
             ),
           ),
         ]
